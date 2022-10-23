@@ -1,12 +1,14 @@
 import { Text } from "@nextui-org/react";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Stat } from "../interfaces";
+import localFavorites from "../utils/localFavorites";
 
 interface Props {
 	stats: Stat[];
 }
 
 export const Chart: FC<Props> = ({ stats }) => {
+	const [widthDevice, setWidthDevice] = useState(localFavorites.setInnerWidthLocal());
 
 	const colorStat = (stat: string) => {
 		switch (stat) {
@@ -22,6 +24,20 @@ export const Chart: FC<Props> = ({ stats }) => {
 				return "#571D91";
 			default:
 				return "#AD007C";
+		}
+	};
+
+	const widthBar = (s: Stat) => {
+		if (widthDevice && widthDevice >= 970) {
+			return `${s.base_stat * 4}px`;
+		}
+
+		if (widthDevice >= 682 && widthDevice < 970) {
+			return `${s.base_stat * 2.7}px`;
+		}
+		
+		if (widthDevice < 500) {
+			return `${s.base_stat * 1.2}px`;
 		}
 	};
 
@@ -52,7 +68,7 @@ export const Chart: FC<Props> = ({ stats }) => {
 					</Text>
 					<div
 						style={{
-							width: `${s.base_stat * 4}px`,
+							width: widthBar(s),
 							height: "12px",
 							borderRadius: "8px",
 							backgroundColor: colorStat(s.stat.name),

@@ -1,5 +1,12 @@
-import { Spacer, Text, useTheme, Navbar } from "@nextui-org/react";
+import {
+	Spacer,
+	Text,
+	useTheme,
+	Navbar,
+	Link as NextUILink,
+} from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 import { SwitchTheme } from "./SwicthTheme";
 
 export const ComponetNavbar = () => {
@@ -16,26 +23,30 @@ export const ComponetNavbar = () => {
 					objectFit="cover"
 					quality={100}
 				/>
-				<Text
-					color={
-						isDark
-							? theme?.colors.yellow700.value
-							: theme?.colors.yellow500.value
-					}
-					h2
-				>
-					P
-				</Text>
-				<Text
-					color={
-						isDark
-							? theme?.colors.yellow700.value
-							: theme?.colors.yellow500.value
-					}
-					h3
-				>
-					okémon
-				</Text>
+				<Link href="/" passHref>
+					<NextUILink>
+						<Text
+							color={
+								isDark
+									? theme?.colors.yellow700.value
+									: theme?.colors.yellow500.value
+							}
+							h2
+						>
+							P
+						</Text>
+						<Text
+							color={
+								isDark
+									? theme?.colors.yellow700.value
+									: theme?.colors.yellow500.value
+							}
+							h3
+						>
+							okémon
+						</Text>
+					</NextUILink>
+				</Link>
 			</Navbar.Brand>
 
 			<Text
@@ -43,10 +54,37 @@ export const ComponetNavbar = () => {
 					isDark ? theme?.colors.accents9.value : theme?.colors.accents6.value
 				}
 				h4
+				className="titleNavbar"
 			>
 				Pokedex de sinnoh
 			</Text>
-			<SwitchTheme />
+
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+				}}
+			>
+				<Link href="/favorites" passHref>
+					<NextUILink>
+						<Text
+							color={
+								isDark
+									? theme?.colors.accents9.value
+									: theme?.colors.accents6.value
+							}
+							h4
+							css={{
+								marginRight: "20px",
+							}}
+						>
+							Favorites
+						</Text>
+					</NextUILink>
+				</Link>
+
+				<SwitchTheme />
+			</div>
 		</Navbar>
 	);
 };

@@ -18,6 +18,8 @@ export const PokeCard: FC<Props> = ({ poke }) => {
 	};
 	
 	const colorHEX = () => {
+		if(typeof window === "undefined") return;
+		
 		let color = "";
 		for (let i = 0; i < 6; i++) {
 			color = color + generarLetra();
@@ -26,7 +28,11 @@ export const PokeCard: FC<Props> = ({ poke }) => {
 	};
 
 	const pokemonClick = () => {
-		router.push(`/pokemon/${poke.id}`);
+		if(poke.name === "wormadam") {
+			router.push(`/name/wormadam-plant`);
+		}else{
+			router.push(`/name/${poke.name}`);
+		}
 	};
 
 	return (
